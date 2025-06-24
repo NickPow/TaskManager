@@ -33,11 +33,15 @@ public class User {
         taskList.printTasks();
     }
 
-    /**
-     * Prints tasks sorted by priority.
-     */
     public void printTasksByPriority() {
         System.out.println("Tasks for " + name + " (sorted by priority):");
         taskList.printTasksByPriority();
+    }
+
+    /**
+     * Returns the head node of the user's task list.
+     */
+    public TaskNode getTaskListHead() {
+        return taskList.getHead();
     }
 }

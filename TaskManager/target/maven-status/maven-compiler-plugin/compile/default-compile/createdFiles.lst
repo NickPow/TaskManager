@@ -1,6 +1,13 @@
-com/taskmanager/TaskNode.class
 com/taskmanager/TaskList.class
-com/taskmanager/Task.class
+com/taskmanager/Task$Priority.class
 com/taskmanager/Main.class
+com/taskmanager/UserTaskWindow$2.class
 com/taskmanager/User.class
 com/taskmanager/ToDoListManager.class
+com/taskmanager/UserTaskWindow$1.class
+com/taskmanager/TaskManagerGUI$1.class
+com/taskmanager/UserTaskWindow.class
+com/taskmanager/TaskManagerGUI.class
+com/taskmanager/TaskNode.class
+com/taskmanager/Task.class
+com/taskmanager/UserTaskWindow$3.class

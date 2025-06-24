@@ -61,9 +61,6 @@ public class TaskList {
         return false;
     }
 
-    /**
-     * Prints all tasks with status icons.
-     */
     public void printTasks() {
         TaskNode current = head;
         int index = 0;
@@ -80,9 +77,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Prints tasks sorted by priority (HIGH -> LOW).
-     */
     public void printTasksByPriority() {
         if (head == null) {
             System.out.println("No tasks found.");
@@ -103,5 +97,12 @@ public class TaskList {
                 index++;
             }
         }
+    }
+
+    /**
+     * Returns the head node of the task list.
+     */
+    public TaskNode getHead() {
+        return head;
     }
 }

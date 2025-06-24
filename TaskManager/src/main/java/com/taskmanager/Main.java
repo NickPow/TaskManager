@@ -3,16 +3,30 @@ package com.taskmanager;
 import java.util.Scanner;
 
 /**
- * Main class providing CLI for Task Manager application.
+ * Main class providing CLI and GUI options for Task Manager application.
  */
 public class Main {
     public static void main(String[] args) {
-
         ToDoListManager manager = new ToDoListManager();
+
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Select mode: 1 for CLI, 2 for GUI");
+        String mode = scanner.nextLine().trim();
+
+        if (mode.equals("1")) {
+            runCLI(manager, scanner);
+        } else {
+            new TaskManagerGUI(manager);
+        }
+    }
+
+    /**
+     * Runs the CLI interface.
+     */
+    private static void runCLI(ToDoListManager manager, Scanner scanner) {
         boolean exit = false;
 
-        System.out.println("=== To-Do List Manager ===");
+        System.out.println("=== To-Do List Manager (CLI Mode) ===");
 
         while (!exit) {
             System.out.println("\nOptions:");
