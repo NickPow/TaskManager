@@ -3,7 +3,7 @@ package com.taskmanager;
 import java.util.Scanner;
 
 /**
- * Main class providing CLI for Task Manager application with improved input handling.
+ * Main class providing CLI for Task Manager application.
  */
 public class Main {
     public static void main(String[] args) {
@@ -22,6 +22,8 @@ public class Main {
             System.out.println("4. View User's Tasks");
             System.out.println("5. View All Users");
             System.out.println("6. Exit");
+            System.out.println("7. Delete Task");
+            System.out.println("8. View User's Tasks by Priority");
             System.out.print("Enter choice: ");
 
             String choice = scanner.nextLine().trim();
@@ -52,7 +54,29 @@ public class Main {
                         if (taskDesc.isEmpty()) {
                             System.out.println("Task description cannot be empty.");
                         } else {
-                            user.addTask(taskDesc);
+                            System.out.print("Enter due date (or leave blank): ");
+                            String dueDate = scanner.nextLine().trim();
+
+                            System.out.print("Select priority (Low, Medium, High): ");
+                            String priorityInput = scanner.nextLine().trim().toUpperCase();
+
+                            Task.Priority priority;
+                            switch (priorityInput) {
+                                case "LOW":
+                                    priority = Task.Priority.LOW;
+                                    break;
+                                case "MEDIUM":
+                                    priority = Task.Priority.MEDIUM;
+                                    break;
+                                case "HIGH":
+                                    priority = Task.Priority.HIGH;
+                                    break;
+                                default:
+                                    System.out.println("Invalid priority. Defaulting to LOW.");
+                                    priority = Task.Priority.LOW;
+                            }
+
+                            user.addTask(taskDesc, dueDate, priority);
                             System.out.println("Task added.");
                         }
                     } else {
@@ -106,6 +130,45 @@ public class Main {
                 case "6":
                     exit = true;
                     System.out.println("Goodbye!");
+                    break;
+
+                case "7":
+                    System.out.print("Enter user's name: ");
+                    name = scanner.nextLine().trim();
+                    user = manager.findUser(name);
+
+                    if (user != null) {
+                        user.printTasks();
+                        System.out.print("Enter task number to delete: ");
+                        String deleteInput = scanner.nextLine().trim();
+                        int delPosition;
+
+                        try {
+                            delPosition = Integer.parseInt(deleteInput);
+
+                            if (user.deleteTask(delPosition)) {
+                                System.out.println("Task deleted.");
+                            } else {
+                                System.out.println("Invalid task number.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Please enter a valid number.");
+                        }
+                    } else {
+                        System.out.println("User not found.");
+                    }
+                    break;
+
+                case "8":
+                    System.out.print("Enter user's name: ");
+                    name = scanner.nextLine().trim();
+                    user = manager.findUser(name);
+
+                    if (user != null) {
+                        user.printTasksByPriority();
+                    } else {
+                        System.out.println("User not found.");
+                    }
                     break;
 
                 default:

@@ -6,11 +6,8 @@ package com.taskmanager;
 public class TaskList {
     private TaskNode head;
 
-    /**
-     * Adds a new task to the end of the list.
-     */
-    public void addTask(String description) {
-        Task newTask = new Task(description);
+    public void addTask(String description, String dueDate, Task.Priority priority) {
+        Task newTask = new Task(description, dueDate, priority);
         TaskNode newNode = new TaskNode(newTask);
 
         if (head == null) {
@@ -24,9 +21,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Marks task at given position as completed.
-     */
     public boolean markTaskCompleted(int position) {
         TaskNode current = head;
         int index = 0;
@@ -39,11 +33,36 @@ public class TaskList {
             current = current.next;
             index++;
         }
-        return false; 
+        return false;
+    }
+
+    public boolean deleteTask(int position) {
+        if (head == null || position < 0) {
+            return false;
+        }
+
+        if (position == 0) {
+            head = head.next;
+            return true;
+        }
+
+        TaskNode current = head;
+        int index = 0;
+
+        while (current.next != null) {
+            if (index == position - 1) {
+                current.next = current.next.next;
+                return true;
+            }
+            current = current.next;
+            index++;
+        }
+
+        return false;
     }
 
     /**
-     * Prints all tasks with their completion status.
+     * Prints all tasks with status icons.
      */
     public void printTasks() {
         TaskNode current = head;
@@ -58,6 +77,31 @@ public class TaskList {
             System.out.println(index + ". " + current.task);
             current = current.next;
             index++;
+        }
+    }
+
+    /**
+     * Prints tasks sorted by priority (HIGH -> LOW).
+     */
+    public void printTasksByPriority() {
+        if (head == null) {
+            System.out.println("No tasks found.");
+            return;
+        }
+
+        for (Task.Priority p : new Task.Priority[]{Task.Priority.HIGH, Task.Priority.MEDIUM, Task.Priority.LOW}) {
+            TaskNode current = head;
+            int index = 0;
+            while (current != null) {
+                if (current.task.getPriority() == p) {
+                    String statusIcon = current.task.isCompleted() ? "[✓]" : "[ ]";
+                    System.out.println(index + ". " + statusIcon + " " + current.task.getDescription()
+                            + " | Due: " + (current.task.getDueDate().isEmpty() ? "N/A" : current.task.getDueDate())
+                            + " | Priority: " + current.task.getPriority());
+                }
+                current = current.next;
+                index++;
+            }
         }
     }
 }
