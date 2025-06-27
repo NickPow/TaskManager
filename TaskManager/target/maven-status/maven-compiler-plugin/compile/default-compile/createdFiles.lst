@@ -9,5 +9,6 @@ com/taskmanager/TaskManagerGUI$1.class
 com/taskmanager/UserTaskWindow.class
 com/taskmanager/TaskManagerGUI.class
 com/taskmanager/TaskNode.class
+com/taskmanager/TaskManagerGUI$2.class
 com/taskmanager/Task.class
 com/taskmanager/UserTaskWindow$3.class

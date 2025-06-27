@@ -7,7 +7,9 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
+
         ToDoListManager manager = new ToDoListManager();
+        manager.loadFromFile("data.json");
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select mode: 1 for CLI, 2 for GUI");
@@ -20,9 +22,6 @@ public class Main {
         }
     }
 
-    /**
-     * Runs the CLI interface.
-     */
     private static void runCLI(ToDoListManager manager, Scanner scanner) {
         boolean exit = false;
 
@@ -142,8 +141,9 @@ public class Main {
                     break;
 
                 case "6":
+                    manager.saveToFile("data.json");
+                    System.out.println("Data saved. Goodbye!");
                     exit = true;
-                    System.out.println("Goodbye!");
                     break;
 
                 case "7":

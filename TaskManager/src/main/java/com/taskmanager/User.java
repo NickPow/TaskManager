@@ -38,10 +38,20 @@ public class User {
         taskList.printTasksByPriority();
     }
 
-    /**
-     * Returns the head node of the user's task list.
-     */
     public TaskNode getTaskListHead() {
         return taskList.getHead();
+    }
+
+    /**
+     * Returns the number of tasks in the user's list.
+     */
+    public int getTaskListSize() {
+        int count = 0;
+        TaskNode current = getTaskListHead();
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
     }
 }

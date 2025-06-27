@@ -23,16 +23,13 @@ public class TaskManagerGUI {
     private void initialize() {
         frame = new JFrame("Task Manager");
         frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // User list display
         userListModel = new DefaultListModel<>();
         userList = new JList<>(userListModel);
         JScrollPane scrollPane = new JScrollPane(userList);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // Bottom panel with Add User button
         JPanel bottomPanel = new JPanel();
         JButton addUserButton = new JButton("Add User");
 
@@ -53,7 +50,6 @@ public class TaskManagerGUI {
         bottomPanel.add(addUserButton);
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Open task window when user is clicked
         userList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 String selectedUser = userList.getSelectedValue();
@@ -63,6 +59,14 @@ public class TaskManagerGUI {
                         new UserTaskWindow(user);
                     }
                 }
+            }
+        });
+
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                manager.saveToFile("data.json");
+                System.exit(0);
             }
         });
 
