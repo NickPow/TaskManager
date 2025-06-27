@@ -1,3 +1,9 @@
+/**
+ *  Project: Task Manager
+ *  Description: A simple task management application with CLI and GUI interfaces.
+ *  Author: NickPow SD12
+ *  Date: June 26, 2025
+ */
 package com.taskmanager;
 
 import java.util.Scanner;

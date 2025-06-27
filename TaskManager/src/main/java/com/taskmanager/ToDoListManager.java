@@ -94,4 +94,38 @@ public class ToDoListManager {
             current = current.next;
         }
     }
+
+    /**
+     * Returns the number of registered users.
+     */
+    public int getUserCount() {
+        return userCount;
+    }
+
+    /**
+     * Returns a user by index, or null if out of bounds.
+     */
+    public User getUserAt(int index) {
+        if (index >= 0 && index < userCount) {
+            return users[index];
+        }
+        return null;
+    }
+
+    /**
+     * Deletes a user by name, shifting remaining users left.
+     */
+    public boolean deleteUser(String name) {
+        for (int i = 0; i < userCount; i++) {
+            if (users[i].getName().equalsIgnoreCase(name.trim())) {
+                for (int j = i; j < userCount - 1; j++) {
+                    users[j] = users[j + 1];
+                }
+                users[userCount - 1] = null;
+                userCount--;
+                return true;
+            }
+        }
+        return false;
+    }
 }
